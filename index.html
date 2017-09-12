@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PERIODIC TABLE</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+	<script src="javascriptfile.js"></script>
+
+</head>
+<body>
+
+<div id="layout">
+    <header>
+        <div>
+            <h1>Periodic table</h1>
+        </div>
+    </header>
+	<br/>
+
+    <div id="top-menu">
+        <div>
+            <ul>
+                <li><a href="index.html" title="Welcome home">HOME</a></li>
+                <li><a href="mendeleev.html" title="Periodic table">PERIODIC TABLE</a></li>
+                <li><a href="quiz.html" title="Quiz">QUIZ</a></li>
+            </ul>
+        </div>
+    </div>
+	<br/>
+
+    <div id="content"> 
+		<div id="welcome-msg">HOME</div>
+		<br>
+		<button onclick="newTable()">Click here to create a new table with random values from 1 to 15</button>
+		<br>
+		<table>
+		<tr> 
+			<td id="square0"></td>
+			<td id="square1"></td>
+			<td id="square2"></td>
+			<td id="square3"></td>
+		</tr>
+		<tr> 
+			<td id="square4"></td>
+			<td id="square5"></td>
+			<td id="square6"></td>
+			<td id="square7"></td>
+		</tr>
+		<tr> 
+			<td id="square8"></td>
+			<td id="square9"></td>
+			<td id="square10"></td>
+			<td id="square11"></td>
+		</tr>
+		<tr> 
+			<td id="square12"></td>
+			<td id="square13"></td>
+			<td id="square14"></td>
+			<td id="empty"></td> 
+		</tr>
+		</table>
+		<!--<p><a href="index.html" id="reload"> Click here</a> to create a new table with random values from 1 to 15</p>-->
+
+		<table>
+			<button onclick="newRandom()">Click here to create a new table with random values from 1 to 15</button>
+
+			<tr>
+				<td id="sq0"></td>
+				<td id="sq1"></td>
+				<td id="sq2"></td>
+				<td id="sq3"></td>
+			</tr>
+			<tr>
+				<td id="sq4"></td>
+				<td id="sq5"></td>
+				<td id="sq6"></td>
+				<td id="sq7"></td>
+			</tr>
+			<tr>
+				<td id="sq8"></td>
+				<td id="sq9"></td>
+				<td id="sq10"></td>
+				<td id="sq11"></td>
+			</tr>
+			<tr>
+				<td id="sq12"></td>
+				<td id="sq13"></td>
+				<td id="sq14"></td>
+				<td id="empty-2"></td>
+			</tr>
+		</table>
+	</div>
+    <div class="clear"></div>
+
+    <footer>
+        <p>&copy; 2017 PERIODIC TABLE. All rights reserved.</p>
+    </footer>
+</div>
+
+</body>
+</html>
