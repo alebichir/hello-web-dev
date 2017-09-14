@@ -10,13 +10,13 @@ p {
 
 h1 {
     font-size: 1.8em;
-    margin: 10px 0 5px 0;
+    margin: 10px 0 10px 0;
 	font-family: 'Shadows Into Light', cursive;
 }
 
 h2 {
     font-size: 1.5em;
-    margin: 10px 0 5px 0;
+    margin: 10px 0 10px 0;
 	font-family: 'Shadows Into Light', cursive;
 }
 
@@ -45,7 +45,7 @@ footer {
     padding: 10px 5px 10px 5px;
     border: 1px solid orangered;
     border-radius: 3px;
-    box-shadow: 1px 1px 3px #c2c2c2;
+    box-shadow: 1px 1px 1px #c2c2c2;
     color: #245674;
 	font-family: 'Shadows Into Light', cursive;
 	background-color: white;
@@ -111,11 +111,20 @@ footer {
 
 table, th, tr, td {
     text-align: left;
-    padding: 15px 15px 15px 15px;
+    padding: 8px 15px 8px 15px;
     border: 1px solid purple;
     width: 32px;
     border-radius: 5px;
     font-family: 'Shadows Into Light', cursive;
+}
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+html, body {
+    width: 100%;
 }
 
 button {
