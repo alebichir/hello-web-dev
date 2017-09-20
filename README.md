@@ -7,7 +7,7 @@ This group project it's actually a homework for a Web-Development Course, we - C
 
 2. Numeric puzzle
 
-Simply by cliking numbers around the empty cell, you can move them inside the empty cell, one by one. The idea is to order them from 0 to 14 or from 14 to 0 insede the table, so it all looks organized.
+Simply by clicking numbers around the empty cell, you can move them inside the empty cell, one by one. The idea is to order them from 0 to 14 or from 14 to 0 inside the table, so it all looks organized.
 
 3. Quiz
 
