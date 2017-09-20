@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PERIODIC TABLE</title>
+    <title>NUMERIC PUZZLE</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-	<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
 
 </head>
 <body>
@@ -11,33 +12,70 @@
 <div id="layout">
     <header>
         <div>
-            <h1>Periodic table</h1>
+            <h1>NUMERIC PUZZLE</h1>
         </div>
     </header>
-	<br/>
+    <br/>
 
     <div id="top-menu">
         <div>
             <ul>
                 <li><a href="index.html" title="Welcome home">HOME</a></li>
-                <li><a href="mendeleev.html" title="Periodic table">PERIODIC TABLE</a></li>
+                <li><a href="numbers.html" title="Play with numbers">PLAY WITH NUMBERS</a></li>
                 <li><a href="quiz.html" title="Quiz">QUIZ</a></li>
             </ul>
         </div>
     </div>
-	<br/>
+    <br/>
 
-    <div id="content"> 
-		<div id="welcome-msg">QUIZ</div>
+    <div id="content">
+        <div id="welcome-msg">QUIZ</div>
         <br>
-	</div>
-	
+        <form method="POST">
+            <div>
+                <p>
+                    <label> 1. What is the square root of 144? </label> <br>
+                    <input type="radio" name="q1" value="11" class="wrong"/>11 <br>
+                    <input type="radio" name="q1" value="12" id="q1"/>12 <br>
+                    <input type="radio" name="q1" value="13" class="wrong"/>13 <br>
+                </p>
+
+                <p>
+                    <label> 2. What is the smallest prime number? </label>
+                    <input type="text" name="q2" id="q2"/>
+                </p>
+
+                <p>
+                    <label> 3. What is 0.88 as a percentage? </label> <br>
+                    <input type="radio" name="q3" value="88%" id="q3"/>88% <br>
+                    <input type="radio" name="q3" value="8.8%" class="wrong"/>8.8% <br>
+                </p>
+
+                <p>
+                    <label> 4. What is the total number of degrees in a triangle? </label> <br>
+                    <input type="radio" name="q4" value="90" class="wrong"/>90 <br>
+                    <input type="radio" name="q4" value="180" id="q4"/>180 <br>
+                    <input type="radio" name="q4" value="360" class="wrong"/>360 <br>
+                </p>
+
+                <p>
+                    <label> 5. How many straight edges does a cube has? </label>
+                    <input type="text" name="q5" id="q5"/>
+                </p>
+
+                <br>
+
+                <button onclick="verify()">Verify your quiz!</button>
+            </div>
+        </form>
+    </div>
+
     <div class="clear"></div>
 
     <footer>
-        <p>&copy; 2017 PERIODIC TABLE. All rights reserved.</p>
+        <p>&copy; 2017 NUMERIC PUZZLE. All rights reserved.</p>
     </footer>
 </div>
-
+<script src="javascriptfile.js"></script>
 </body>
 </html>
