@@ -1,0 +1,65 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "category": "Science%3A Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How is the number 9 represented as a binary number?",
+      "correct_answer": "1001",
+      "incorrect_answers": [
+        "1000",
+        "1110",
+        "1010"
+      ]
+    },
+    {
+      "category": "Science%3A Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "In Roman Numerals what does XL equate to?",
+      "correct_answer": "40",
+      "incorrect_answers": [
+        "60",
+        "15",
+        "90"
+      ]
+    },
+    {
+      "category": "Science%3A Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What's the square root of 49?",
+      "correct_answer": "7",
+      "incorrect_answers": [
+        "4",
+        "12",
+        "9"
+      ]
+    },
+    {
+      "category": "Science%3A Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "What prime number comes next after 19?",
+      "correct_answer": "23",
+      "incorrect_answers": [
+        "25",
+        "21",
+        "27"
+      ]
+    },
+    {
+      "category": "Science%3A Mathematics",
+      "type": "multiple",
+      "difficulty": "easy",
+      "question": "How many sides does a heptagon have?",
+      "correct_answer": "7",
+      "incorrect_answers": [
+        "8",
+        "6",
+        "5"
+      ]
+    }
+  ]
+}

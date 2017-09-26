@@ -1,3 +1,16 @@
+//DOM
+var header = document.getElementById("header");
+function changeHeaderColor() {
+    header.style.color = "orange";
+}
+header.onclick = changeHeaderColor;
+
+var menuColors = document.getElementsByClassName("tm");
+function changeMenuColor() {
+    menuColors.style.color = "red";
+}
+menuColors.onclick = changeMenuColor;
+
 //Mixing numbers inside a table
 function newTable() {
     for (var i = 0; i < 16; i++) {
@@ -130,5 +143,13 @@ function verify() {
 }
 
 
+//new-quiz
+//quiz generated using https://opentdb.com/api_config.php
+function check(){
+    var answer = document.querySelector('input[name="answer"]').value;
+//to do
+}
+
+//save content of our table with numbers
 
 

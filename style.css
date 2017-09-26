@@ -90,13 +90,12 @@ footer {
 }
 
 #top-menu div ul a:hover {
-    color: #29a7e1;
-    background: #ffffff;
+    background: orange;
+    color: darkblue;
 }
 
-#top-menu div ul a:active {
-    background: #c7e6f5;
-    color: #29a7e1;
+#top-menu div ul a:active{
+    background: orange;
 }
 
 #content {
@@ -131,6 +130,7 @@ table {
 th, tr, td {
     border-style: outset;
     border-width: 3px;
+    background-color: #29a7e1;
 }
 
 html, body {

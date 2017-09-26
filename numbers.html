@@ -12,7 +12,7 @@
 <div id="layout">
     <header>
         <div>
-            <h1>NUMERIC PUZZLE</h1>
+            <h1 id="header">NUMERIC PUZZLE</h1>
         </div>
     </header>
     <br/>
@@ -20,9 +20,10 @@
     <div id="top-menu">
         <div>
             <ul>
-                <li><a href="index.html" title="Welcome home">HOME</a></li>
-                <li><a href="numbers.html" title="Play with numbers">PLAY WITH NUMBERS</a></li>
-                <li><a href="quiz.html" title="Quiz">QUIZ</a></li>
+                <li><a href="index.html" title="Welcome home" class="tm">HOME</a></li>
+                <li><a href="numbers.html" title="Play with numbers" class="tm">PLAY WITH NUMBERS</a></li>
+                <li><a href="old-quiz.html" title="Old quiz" class="tm">OLD QUIZ</a></li>
+                <li><a href="new-quiz.php" title="New quiz" class="tm">NEW QUIZ</a></li>
             </ul>
         </div>
     </div>
@@ -31,6 +32,7 @@
     <div id="content">
         <div id="welcome-msg">PLAY WITH NUMBERS</div>
         <br>
+        <button id="solution">Puzzle solution</button>
         <table id="random-numbers">
             <tr>
                 <td id="square0" class="n4"></td>
@@ -67,6 +69,34 @@
         <!--n7 sus, stanga-->
         <!--n8 stanga, dreapta, jos-->
         <!--n9 stanga, dreapta, sus-->
+        <br>
+        <table id="solution1" style="display: none;">
+            <tr>
+                <td>0</td>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+                <td>7</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>9</td>
+                <td>10</td>
+                <td>11</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>13</td>
+                <td>14</td>
+                <td></td>
+            </tr>
+        </table>
+        <br>
     </div>
 
     <div class="clear"></div>
