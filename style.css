@@ -6,40 +6,40 @@ body {
 }
 
 p {
-    font-family: 'Shadows Into Light', cursive;
+   	font-family: 'Shadows Into Light', cursive;
 }
 
 h1 {
     font-size: 1.8em;
     margin: 10px 0 10px 0;
-    font-family: 'Shadows Into Light', cursive;
+	font-family: 'Shadows Into Light', cursive;
 }
 
 h2 {
     font-size: 1.5em;
     margin: 10px 0 10px 0;
-    font-family: 'Shadows Into Light', cursive;
+	font-family: 'Shadows Into Light', cursive;
 }
 
 header {
     max-height: 200px;
     background-color: white;
     width: 100%;
-    font-size: 0.9em;
-    font-family: 'Shadows Into Light', cursive;
-    border-radius: 4px;
-    text-align: center;
+	font-size: 0.9em;
+	font-family: 'Shadows Into Light', cursive;
+	border-radius: 4px;
+	text-align: center;
 }
 
 footer {
     text-align: center;
     bottom: 0;
-    min-height: 30px;
+	min-height: 30px;
     width: 100%;
     background-color: white;
     font-size: 0.9em;
-    font-family: 'Shadows Into Light', cursive;
-    border-radius: 4px;
+	font-family: 'Shadows Into Light', cursive;
+	border-radius: 4px;
 }
 
 #welcome-msg {
@@ -48,8 +48,8 @@ footer {
     border-radius: 3px;
     box-shadow: 1px 1px 1px #c2c2c2;
     color: #245674;
-    font-family: 'Shadows Into Light', cursive;
-    background-color: white;
+	font-family: 'Shadows Into Light', cursive;
+	background-color: white;
 }
 
 .clear {
@@ -60,10 +60,10 @@ footer {
     padding: 0;
     margin: 0;
     text-align: center;
-    font-family: 'Shadows Into Light', cursive;
+	font-family: 'Shadows Into Light', cursive;
     background-color: orange;
-    border-radius: 4px;
-    color: black;
+	border-radius: 4px;
+	color: black;
     height: 40px;
 }
 
@@ -93,23 +93,22 @@ footer {
     color: #29a7e1;
     background: #ffffff;
 }
-
 #top-menu div ul a:active {
     background: #c7e6f5;
     color: #29a7e1;
 }
 
 #content {
-    font-family: 'Shadows Into Light', cursive;
-    border-radius: 5px;
-    background-color: white;
-    padding: 10px;
+	font-family: 'Shadows Into Light', cursive;
+	border-radius: 5px;
+	background-color: white;
+	padding: 10px;
 }
 
 #layout {
-    opacity: 0.9;
+	opacity: 0.9;
     filter: alpha(opacity=90);
-    font-family: 'Shadows Into Light', cursive;
+	font-family: 'Shadows Into Light', cursive;
 }
 
 table, th, tr, td {
@@ -131,6 +130,7 @@ table {
 th, tr, td {
     border-style: outset;
     border-width: 3px;
+    background-color: #29a7e1;
 }
 
 html, body {
@@ -138,9 +138,9 @@ html, body {
 }
 
 button {
-    color: #fff;
-    background-color: orange;
-    border: 1px solid #fff;
+    color:#fff;
+	background-color: orange;
+	border: 1px solid #fff;
     border-radius: 5px;
     text-align: center;
     font-family: 'Shadows Into Light', cursive;
