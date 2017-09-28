@@ -131,6 +131,7 @@ th, tr, td {
     border-style: outset;
     border-width: 3px;
     background-color: #29a7e1;
+    width: 100px;
 }
 
 html, body {

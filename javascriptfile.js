@@ -5,15 +5,13 @@ function changeHeaderColor() {
 }
 header.onclick = changeHeaderColor;
 
-var menuColors = document.getElementsByClassName("tm");
-function changeMenuColor() {
-    menuColors.style.color = "red";
-}
-menuColors.onclick = changeMenuColor;
 
-//Mixing numbers inside a table
+//Start the numeric puzzle
+var numbers = [];
+//var tableContent = '';
+
 function newTable() {
-    for (var i = 0; i < 16; i++) {
+    for (var i = 0; i <= 14; i++) {
         setSquare(i);
     }
 }
@@ -21,35 +19,108 @@ function newTable() {
 function setSquare(thisSquare, entry) {
     var currSquare = "square" + thisSquare;
     document.getElementById(currSquare).innerHTML = entry;
+    //tableContent = this.entry;
 }
 
-for (var numbers = [], i = 0; i < 15; ++i) {
-    numbers[i] = i;
-}
+// for (i = 0; i < 15; ++i) {
+//      numbers[i] = i;
+// }
+
+//1. ajax - read from a json file
+// 2. show numbers
+$.ajax('numbers.json').done(function (numbers) {
+    console.debug('numbers ', numbers);
+    numbers.forEach(setSquare);
+    //$("#random-numbers td").html(tableContent);
+    $('#random-numbers td').each(function (i) {
+        i--;
+        $(this).html(numbers[i]);
+    });
+});
+
+
+//Mixing numbers inside the table
+// function shuffle(array) {
+//     var tmp, current, top = array.length;
+//     if (top) while (--top) {
+//         current = Math.floor(Math.random() * (top + 1));
+//         tmp = array[current];
+//         array[current] = array[top];
+//         array[top] = tmp;
+//     }
+//     return array;
+// }
+// $.ajax('numbers.json').done(function shuffle(numbers) {
+//     var tmp, current, top = numbers.length;
+//     if (top) while (--top) {
+//         current = Math.floor(Math.random() * (top + 1));
+//         tmp = numbers[current];
+//         numbers[current] = numbers[top];
+//         numbers[top] = tmp;
+//     }
+//     //return numbers;
+//     numbers.forEach(setSquare);
+//     $('#random-numbers td').each(function (i) {
+//         i--;
+//         $(this).html(numbers[i]);
+//     });
+// });
+
+
+//Start the game
+$('#random-numbers').ready(function(){
+    $("#start").click(function(){
+        $.get('numbers.json',function shuffle(numbers) {
+            var tmp, current, top = numbers.length;
+            if (top) while (--top) {
+                current = Math.floor(Math.random() * (top + 1));
+                tmp = numbers[current];
+                numbers[current] = numbers[top];
+                numbers[top] = tmp;
+            }
+            numbers.forEach(setSquare);
+            $('#random-numbers td').each(function (i) {
+                i--;
+                $(this).html(numbers[i]);
+            });
+        });
+    });
+});
+
+//Reset the game
+$('#random-numbers').ready(function(){
+    $("#reset").click(function(){
+        $.get('numbers.json',function (numbers) {
+            console.debug('numbers ', numbers);
+            numbers.forEach(setSquare);
+            //$("#random-numbers td").html(tableContent);
+            $('#random-numbers td').each(function (i) {
+                i--;
+                $(this).html(numbers[i]);
+            });
+        });
+    });
+});
+
+// var shuffledNumbers = shuffle(numbers);
+//
+// function showNumbers(numbers) {
+//     for (var i = 0; i < numbers.length; i++) {
+//         var entry = numbers[i];
+//         setSquare(i, entry);
+//     }
+// }
+
+//showNumbers(shuffledNumbers);
 
 //console.warn(numbers);
 
-function shuffle(array) {
-    var tmp, current, top = array.length;
-    if (top) while (--top) {
-        current = Math.floor(Math.random() * (top + 1));
-        tmp = array[current];
-        array[current] = array[top];
-        array[top] = tmp;
-    }
-    return array;
-}
 
-var shuffledNumbers = shuffle(numbers);
-
-for (var i = 0; i < shuffledNumbers.length; i++) {
-    var entry = shuffledNumbers[i];
-    setSquare(i, entry);
-}
+//find empty neighbor cells inside a table and do a move inside the table
+$('#random-numbers td').click(clickPeTd);
 
 
-//find empty neighbor cells inside a table
-$('#random-numbers td').click(function () {
+function clickPeTd() {
     var nr = this.innerHTML;//cell value
     var id = this.id.replace('square', ''); //cell number
     console.info("Clicked cell", this, id, nr);
@@ -88,7 +159,7 @@ $('#random-numbers td').click(function () {
         console.info("Clicked cell is not empty", this, id, nr);
     }
 
-});
+}
 
 // $('#random-numbers td').dblclick(function () {
 //     var nr = this.innerHTML;
@@ -145,11 +216,10 @@ function verify() {
 
 //new-quiz
 //quiz generated using https://opentdb.com/api_config.php
-function check(){
+function check() {
     var answer = document.querySelector('input[name="answer"]').value;
-//to do
 }
 
-//save content of our table with numbers
+
 
 
