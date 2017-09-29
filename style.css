@@ -173,3 +173,8 @@ input[type=submit]:hover {
     background-color: skyblue;
     font-family: 'Shadows Into Light', cursive;
 }
+
+#random-numbers {
+    border-collapse: separate;
+    empty-cells: hide;
+}
