@@ -5,7 +5,52 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        //verify a quiz
+        function verify() {
+            var q1 = document.querySelector('input[name="q1"]:checked').value;
+            var a1 = document.getElementById("q1").value;
+            var q2 = document.querySelector('input[name="q2"]').value;
+            var a2 = "2";
+            var q3 = document.querySelector('input[name="q3"]:checked').value;
+            var a3 = document.getElementById("q3").value;
+            var q4 = document.querySelector('input[name="q4"]:checked').value;
+            var a4 = document.getElementById("q4").value;
+            var q5 = document.querySelector('input[name="q5"]').value;
+            var a5 = "12";
 
+            if (q1 == a1) {
+                alert("Correct answer for question nr. 1!");
+            } else {
+                alert("Wrong answer for question nr. 1. The correct answer is 12.");
+            }
+
+            if (q2 == a2) {
+                alert("Correct answer for question nr. 2!");
+            } else {
+                alert("Wrong answer for question nr. 2. The correct answer is 2.");
+            }
+
+            if (q3 == a3) {
+                alert("Correct answer for question nr. 3!");
+            } else {
+                alert("Wrong answer for question nr. 3. The correct answer is 88%.");
+            }
+
+            if (q4 == a4) {
+                alert("Correct answer for question nr. 4!");
+            } else {
+                alert("Wrong answer for question nr. 4. The correct answer is 180 degrees.");
+            }
+
+            if (q5 == a5) {
+                alert("Correct answer for question nr. 5!");
+            } else {
+                alert("Wrong answer for question nr. 5. The correct answer is 12.");
+            }
+        }
+    </script>
 </head>
 <body>
 
@@ -77,6 +122,7 @@
         <p>&copy; 2017 NUMERIC PUZZLE. All rights reserved.</p>
     </footer>
 </div>
-<script src="javascriptfile.js"></script>
+<!--<script src="javascriptfile.js"></script>-->
+
 </body>
 </html>

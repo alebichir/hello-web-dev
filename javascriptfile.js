@@ -11,7 +11,7 @@ var numbers = [];
 //var tableContent = '';
 
 function newTable() {
-    for (var i = 0; i <= 14; i++) {
+    for (var i = 0; i < 16; i++) {
         setSquare(i);
     }
 }
@@ -33,10 +33,24 @@ $.ajax('numbers.json').done(function (numbers) {
     numbers.forEach(setSquare);
     //$("#random-numbers td").html(tableContent);
     $('#random-numbers td').each(function (i) {
-        i--;
+        //i--;
         $(this).html(numbers[i]);
     });
+    //the cell that has 0 as a value is emptiead
+    $('#random-numbers td').each(function () {
+        $(this).filter(function () {
+            if ($(this).text() == '0') {
+                return $(this).text("")
+                    //.css('background-color', 'white');
+            }
+        });
+    });
 });
+
+//the cell that has 0 as a value is emptiead
+// $('#random-numbers td').filter(function() {
+//     return $(this).text() == '0';
+// }).text('');
 
 
 //Mixing numbers inside the table
@@ -68,9 +82,9 @@ $.ajax('numbers.json').done(function (numbers) {
 
 
 //Start the game
-$('#random-numbers').ready(function(){
-    $("#start").click(function(){
-        $.get('numbers.json',function shuffle(numbers) {
+$('#random-numbers').ready(function () {
+    $("#start").click(function () {
+        $.get('numbers.json', function shuffle(numbers) {
             var tmp, current, top = numbers.length;
             if (top) while (--top) {
                 current = Math.floor(Math.random() * (top + 1));
@@ -80,23 +94,39 @@ $('#random-numbers').ready(function(){
             }
             numbers.forEach(setSquare);
             $('#random-numbers td').each(function (i) {
-                i--;
+                //i--;
                 $(this).html(numbers[i]);
+            });
+            $('#random-numbers td').each(function () {
+                $(this).filter(function () {
+                    if ($(this).text() == '0') {
+                        return $(this).text("")
+                            //.css('background-color', 'white');
+                    }
+                });
             });
         });
     });
 });
 
 //Reset the game
-$('#random-numbers').ready(function(){
-    $("#reset").click(function(){
-        $.get('numbers.json',function (numbers) {
+$('#random-numbers').ready(function () {
+    $("#reset").click(function () {
+        $.get('numbers.json', function (numbers) {
             console.debug('numbers ', numbers);
             numbers.forEach(setSquare);
             //$("#random-numbers td").html(tableContent);
             $('#random-numbers td').each(function (i) {
-                i--;
+                //i--;
                 $(this).html(numbers[i]);
+            });
+            $('#random-numbers td').each(function () {
+                $(this).filter(function () {
+                    if ($(this).text() == '0') {
+                        return $(this).text("")
+                            //.css('background-color', 'white');
+                    }
+                });
             });
         });
     });
@@ -114,6 +144,10 @@ $('#random-numbers').ready(function(){
 //showNumbers(shuffledNumbers);
 
 //console.warn(numbers);
+
+
+//certain css for an empty cell
+//$("td:empty").css('background-color', 'white');
 
 
 //find empty neighbor cells inside a table and do a move inside the table
@@ -169,56 +203,56 @@ function clickPeTd() {
 // });
 
 
-//verify a quiz
-function verify() {
-    var q1 = document.querySelector('input[name="q1"]:checked').value;
-    var a1 = document.getElementById("q1").value;
-    var q2 = document.querySelector('input[name="q2"]').value;
-    var a2 = "2";
-    var q3 = document.querySelector('input[name="q3"]:checked').value;
-    var a3 = document.getElementById("q3").value;
-    var q4 = document.querySelector('input[name="q4"]:checked').value;
-    var a4 = document.getElementById("q4").value;
-    var q5 = document.querySelector('input[name="q5"]').value;
-    var a5 = "12";
-
-    if (q1 == a1) {
-        alert("Correct answer for question nr. 1!");
-    } else {
-        alert("Wrong answer for question nr. 1. The correct answer is 12.");
-    }
-
-    if (q2 == a2) {
-        alert("Correct answer for question nr. 2!");
-    } else {
-        alert("Wrong answer for question nr. 2. The correct answer is 2.");
-    }
-
-    if (q3 == a3) {
-        alert("Correct answer for question nr. 3!");
-    } else {
-        alert("Wrong answer for question nr. 3. The correct answer is 88%.");
-    }
-
-    if (q4 == a4) {
-        alert("Correct answer for question nr. 4!");
-    } else {
-        alert("Wrong answer for question nr. 4. The correct answer is 180 degrees.");
-    }
-
-    if (q5 == a5) {
-        alert("Correct answer for question nr. 5!");
-    } else {
-        alert("Wrong answer for question nr. 5. The correct answer is 12.");
-    }
-}
+// //verify a quiz
+// function verify() {
+//     var q1 = document.querySelector('input[name="q1"]:checked').value;
+//     var a1 = document.getElementById("q1").value;
+//     var q2 = document.querySelector('input[name="q2"]').value;
+//     var a2 = "2";
+//     var q3 = document.querySelector('input[name="q3"]:checked').value;
+//     var a3 = document.getElementById("q3").value;
+//     var q4 = document.querySelector('input[name="q4"]:checked').value;
+//     var a4 = document.getElementById("q4").value;
+//     var q5 = document.querySelector('input[name="q5"]').value;
+//     var a5 = "12";
+//
+//     if (q1 == a1) {
+//         alert("Correct answer for question nr. 1!");
+//     } else {
+//         alert("Wrong answer for question nr. 1. The correct answer is 12.");
+//     }
+//
+//     if (q2 == a2) {
+//         alert("Correct answer for question nr. 2!");
+//     } else {
+//         alert("Wrong answer for question nr. 2. The correct answer is 2.");
+//     }
+//
+//     if (q3 == a3) {
+//         alert("Correct answer for question nr. 3!");
+//     } else {
+//         alert("Wrong answer for question nr. 3. The correct answer is 88%.");
+//     }
+//
+//     if (q4 == a4) {
+//         alert("Correct answer for question nr. 4!");
+//     } else {
+//         alert("Wrong answer for question nr. 4. The correct answer is 180 degrees.");
+//     }
+//
+//     if (q5 == a5) {
+//         alert("Correct answer for question nr. 5!");
+//     } else {
+//         alert("Wrong answer for question nr. 5. The correct answer is 12.");
+//     }
+// }
 
 
 //new-quiz
-//quiz generated using https://opentdb.com/api_config.php
-function check() {
-    var answer = document.querySelector('input[name="answer"]').value;
-}
+// //quiz generated using https://opentdb.com/api_config.php
+// function check() {
+//     var answer = document.querySelector('input[name="answer"]').value;
+// }
 
 
 

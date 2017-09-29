@@ -5,6 +5,15 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        //new-quiz
+        //quiz generated using https://opentdb.com/api_config.php
+        function check() {
+            var answer = document.querySelector('input[name="answer"]').value;
+        }
+    </script>
+
 </head>
 <body>
 
@@ -62,6 +71,6 @@
         <p>&copy; 2017 NUMERIC PUZZLE. All rights reserved.</p>
     </footer>
 </div>
-<script src="javascriptfile.js"></script>
+<!--<script src="javascriptfile.js"></script>-->
 </body>
 </html>
