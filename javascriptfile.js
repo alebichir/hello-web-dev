@@ -125,7 +125,6 @@ $('#random-numbers td').click(function clickPeTd() {
 });
 
 
-//stopwatch
 
 
 
