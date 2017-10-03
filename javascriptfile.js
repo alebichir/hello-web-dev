@@ -8,7 +8,6 @@ header.onclick = changeHeaderColor;
 
 //Start the numeric puzzle
 var numbers = [];
-//var tableContent = '';
 
 function newTable() {
     for (var i = 0; i < 16; i++) {
@@ -19,66 +18,25 @@ function newTable() {
 function setSquare(thisSquare, entry) {
     var currSquare = "square" + thisSquare;
     document.getElementById(currSquare).innerHTML = entry;
-    //tableContent = this.entry;
 }
 
-// for (i = 0; i < 15; ++i) {
-//      numbers[i] = i;
-// }
 
 //1. ajax - read from a json file
 // 2. show numbers
 $.ajax('numbers.json').done(function (numbers) {
     console.debug('numbers ', numbers);
     numbers.forEach(setSquare);
-    //$("#random-numbers td").html(tableContent);
     $('#random-numbers td').each(function (i) {
-        //i--;
         $(this).html(numbers[i]);
-    });
-    //the cell that has 0 as a value is emptiead
-    $('#random-numbers td').each(function () {
-        $(this).filter(function () {
-            if ($(this).text() == '0') {
-                return $(this).text("")
-                    //.css('background-color', 'white');
-            }
-        });
+
+        if (i === 0) {
+            $(this).text('');
+            $(this).addClass('empty');
+        } else {
+            $(this).removeClass('empty');
+        }
     });
 });
-
-//the cell that has 0 as a value is emptiead
-// $('#random-numbers td').filter(function() {
-//     return $(this).text() == '0';
-// }).text('');
-
-
-//Mixing numbers inside the table
-// function shuffle(array) {
-//     var tmp, current, top = array.length;
-//     if (top) while (--top) {
-//         current = Math.floor(Math.random() * (top + 1));
-//         tmp = array[current];
-//         array[current] = array[top];
-//         array[top] = tmp;
-//     }
-//     return array;
-// }
-// $.ajax('numbers.json').done(function shuffle(numbers) {
-//     var tmp, current, top = numbers.length;
-//     if (top) while (--top) {
-//         current = Math.floor(Math.random() * (top + 1));
-//         tmp = numbers[current];
-//         numbers[current] = numbers[top];
-//         numbers[top] = tmp;
-//     }
-//     //return numbers;
-//     numbers.forEach(setSquare);
-//     $('#random-numbers td').each(function (i) {
-//         i--;
-//         $(this).html(numbers[i]);
-//     });
-// });
 
 
 //Start the game
@@ -94,16 +52,14 @@ $('#random-numbers').ready(function () {
             }
             numbers.forEach(setSquare);
             $('#random-numbers td').each(function (i) {
-                //i--;
                 $(this).html(numbers[i]);
-            });
-            $('#random-numbers td').each(function () {
-                $(this).filter(function () {
-                    if ($(this).text() == '0') {
-                        return $(this).text("")
-                            //.css('background-color', 'white');
-                    }
-                });
+
+                if (i === 0) {
+                    $(this).text('');
+                    $(this).addClass('empty');
+                } else {
+                    $(this).removeClass('empty');
+                }
             });
         });
     });
@@ -115,144 +71,64 @@ $('#random-numbers').ready(function () {
         $.get('numbers.json', function (numbers) {
             console.debug('numbers ', numbers);
             numbers.forEach(setSquare);
-            //$("#random-numbers td").html(tableContent);
             $('#random-numbers td').each(function (i) {
-                //i--;
                 $(this).html(numbers[i]);
-            });
-            $('#random-numbers td').each(function () {
-                $(this).filter(function () {
-                    if ($(this).text() == '0') {
-                        return $(this).text("")
-                            //.css('background-color', 'white');
-                    }
-                });
+                if (i === 0) {
+                    $(this).text('');
+                    $(this).addClass('empty');
+                } else {
+                    $(this).removeClass('empty');
+                }
             });
         });
     });
 });
 
-// var shuffledNumbers = shuffle(numbers);
-//
-// function showNumbers(numbers) {
-//     for (var i = 0; i < numbers.length; i++) {
-//         var entry = numbers[i];
-//         setSquare(i, entry);
-//     }
-// }
-
-//showNumbers(shuffledNumbers);
-
-//console.warn(numbers);
-
-
-//certain css for an empty cell
-//$("td:empty").css('background-color', 'white');
-
 
 //find empty neighbor cells inside a table and do a move inside the table
-$('#random-numbers td').click(clickPeTd);
-
-
-function clickPeTd() {
+$('#random-numbers td').click(function clickPeTd() {
     var nr = this.innerHTML;//cell value
     var id = this.id.replace('square', ''); //cell number
     console.info("Clicked cell", this, id, nr);
 
-    var $td = $(this);
-    var index = $td.index();
-    var $tr = $td.parent();
-    var $left = $td.prev(); //find the previous td
-    var $right = $td.next();//find the next td
-    var $top = $tr.prev().find('td').eq(index);//find the td with the same index in previous row
-    var $buttom = $tr.next().find('td').eq(index);//find the td with the same index in next row
-    console.info(this, $left, $right, $buttom, $top);
+    var td = $(this),
+        index = td.index(),
+        tr = td.parent(),
+        left = td.prev(), //find the previous td
+        right = td.next(),//find the next td
+        top = tr.prev().find('td').eq(index),//find the td with the same index in previous row
+        bottom = tr.next().find('td').eq(index);//find the td with the same index in next row
 
-    if ($left.html() == '') {
-        console.info($left, 'left');
-        $left.html(nr);
-        $td.html('');
-    } else if ($right.html() == '') {
-        console.info($right, 'right');
-        $right.html(nr);
-        $td.html('');
-    } else if ($top.html() == '') {
-        console.info($top, 'top');
-        $top.html(nr);
-        $td.html('');
-    } else if ($buttom.html() == '') {
-        console.info($buttom, 'buttom');
-        $buttom.html(nr);
-        $td.html('');
-    }
-    ;
+    //console.info(this, left, right, bottom, top);
 
-    if (nr === '') {
-        console.info("Clicked cell is empty", this, id, nr);
-    } else {
-        console.info("Clicked cell is not empty", this, id, nr);
-    }
-
-}
-
-// $('#random-numbers td').dblclick(function () {
-//     var nr = this.innerHTML;
-//     $("td:empty").text(nr);
-//     $(this).text('');
-//
-// });
+    if (left.html() == '') {
+        left.html(nr);
+        td.html('');
+        td.addClass('empty');
+        left.removeClass('empty');
+    } else if (right.html() == '') {
+        right.html(nr);
+        td.html('');
+        td.addClass('empty');
+        right.removeClass('empty');
+    } else if (top.html() == '') {
+        top.html(nr);
+        td.html('');
+        td.addClass('empty');
+        top.removeClass('empty');
+    } else if (bottom.html() == '') {
+        bottom.html(nr);
+        td.html('');
+        td.addClass('empty');
+        bottom.removeClass('empty');
+    };
+});
 
 
-// //verify a quiz
-// function verify() {
-//     var q1 = document.querySelector('input[name="q1"]:checked').value;
-//     var a1 = document.getElementById("q1").value;
-//     var q2 = document.querySelector('input[name="q2"]').value;
-//     var a2 = "2";
-//     var q3 = document.querySelector('input[name="q3"]:checked').value;
-//     var a3 = document.getElementById("q3").value;
-//     var q4 = document.querySelector('input[name="q4"]:checked').value;
-//     var a4 = document.getElementById("q4").value;
-//     var q5 = document.querySelector('input[name="q5"]').value;
-//     var a5 = "12";
-//
-//     if (q1 == a1) {
-//         alert("Correct answer for question nr. 1!");
-//     } else {
-//         alert("Wrong answer for question nr. 1. The correct answer is 12.");
-//     }
-//
-//     if (q2 == a2) {
-//         alert("Correct answer for question nr. 2!");
-//     } else {
-//         alert("Wrong answer for question nr. 2. The correct answer is 2.");
-//     }
-//
-//     if (q3 == a3) {
-//         alert("Correct answer for question nr. 3!");
-//     } else {
-//         alert("Wrong answer for question nr. 3. The correct answer is 88%.");
-//     }
-//
-//     if (q4 == a4) {
-//         alert("Correct answer for question nr. 4!");
-//     } else {
-//         alert("Wrong answer for question nr. 4. The correct answer is 180 degrees.");
-//     }
-//
-//     if (q5 == a5) {
-//         alert("Correct answer for question nr. 5!");
-//     } else {
-//         alert("Wrong answer for question nr. 5. The correct answer is 12.");
-//     }
-// }
+//stopwatch
 
 
-//new-quiz
-// //quiz generated using https://opentdb.com/api_config.php
-// function check() {
-//     var answer = document.querySelector('input[name="answer"]').value;
-// }
+
 
 
 
