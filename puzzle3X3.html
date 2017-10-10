@@ -3,16 +3,9 @@
 <head>
     <title>NUMERIC PUZZLE</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-<!--    <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">-->
+    <!--<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">-->
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        //new-quiz
-        //quiz generated using https://opentdb.com/api_config.php
-        function check() {
-            var answer = document.querySelector('input[name="answer"]').value;
-        }
-    </script>
 
 </head>
 <body>
@@ -40,31 +33,32 @@
     <br/>
 
     <div id="content">
-        <div id="welcome-msg">NEW QUIZ</div>
+        <div id="welcome-msg">PUZZLE 3X3</div>
         <br>
-        <?php
-        $json = file_get_contents("questions.json");
-        $data = json_decode($json);
-        if (count($data)) {
-            // Open the list of questions
-            echo "<div>";
+        <table id="random-numbers3X3">
+            <tr>
+                <td id="sqa0"></td>
+                <td id="sqa1"></td>
+                <td id="sqa2"></td>
+            </tr>
+            <tr>
+                <td id="sqa3"></td>
+                <td id="sqa4"></td>
+                <td id="sqa5"></td>
+            </tr>
+            <tr>
+                <td id="sqa6"></td>
+                <td id="sqa7"></td>
+                <td id="sqa8"></td>
+            </tr>
+        </table>
+        <br>
+        <button id="start">Start level 1</button>
+        <button id="reset">Reset the game</button>
 
-            // Cycle through the array
-            foreach ($data->results as $id => $results) {
+        <label id="minutes">00</label> : <label id="seconds">00</label>
+        <br>
 
-                // Output a paragraph
-                echo "<p>$results->question</p>";
-                echo "<p><input type='radio' name='answer'> $results->correct_answer</p>";
-
-                //put here radio buttons for incorrect answers
-            }
-
-            // Close the list of questions
-            echo "</div>";
-        }
-        ?>
-
-        <button onclick="check()">Check your quiz!</button>
     </div>
 
     <div class="clear"></div>
@@ -73,6 +67,6 @@
         <p>&copy; 2017 NUMERIC PUZZLE. All rights reserved.</p>
     </footer>
 </div>
-<!--<script src="javascriptfile.js"></script>-->
+<script src="puzzle3X3.js"></script>
 </body>
 </html>
