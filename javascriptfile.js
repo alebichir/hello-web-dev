@@ -34,20 +34,20 @@ function manageTd(numbers) {
     });
 }
 
-// function shuffle(numbers) {
-//     return function (numbers) {
-//         var tmp, current, top = numbers.length;
-//         if (top) while (--top) {
-//             current = Math.floor(Math.random() * (top + 1));
-//             tmp = numbers[current];
-//             numbers[current] = numbers[top];
-//             numbers[top] = tmp;
-//         }
-//         numbers.forEach(setSquare);
-//         manageTd(numbers);
-//         startTimer();
-//     }
-// }
+function shuffle(numbers) {
+    // return function (numbers) {
+        var tmp, current, top = numbers.length;
+        if (top) while (--top) {
+            current = Math.floor(Math.random() * (top + 1));
+            tmp = numbers[current];
+            numbers[current] = numbers[top];
+            numbers[top] = tmp;
+        }
+        numbers.forEach(setSquare);
+        manageTd(numbers);
+        startTimer();
+    // }
+}
 
 //1. ajax - read from a json file
 // 2. show numbers
@@ -57,7 +57,8 @@ function manageTd(numbers) {
 //     manageTd(numbers);
 // });
 
-$.ajax('numbers0.json', {
+// $.ajax('numbers0.json', {
+$.ajax('./list.php', {
     cache: false,
     dataType: 'json'
 }).done(function (numbers) {
@@ -76,69 +77,34 @@ $.ajax('numbers0.json', {
 //Start the game
 $('#random-numbers').ready(function () {
     var j = 1;
+
+    // $("#start").click(function () {
+    //     $.ajax('numbers' + j + '.json', {
+    //         cache: false,
+    //         dataType: 'json'
+    //     }).done(function (numbers) {
+    //         console.debug('numbers ', numbers);
+    //         numbers.forEach(setSquare);
+    //         manageTd(numbers);
+    //         startTimer();
+    //         console.info(j);
+    //         $("#start").text("Restart level 1");
+    //         if(j < 4) {
+    //             j++;
+    //         } else {
+    //             j = 1;
+    //         }
+    //     });
+    // });
+
     $("#start").click(function () {
-        if (j == 1) {
-            $.ajax('numbers1.json', {
-                cache: false,
-                dataType: 'json'
-            }).done(function (numbers) {
-                console.debug('numbers ', numbers);
-                numbers.forEach(setSquare);
-                manageTd(numbers);
-                startTimer();
-                j++;
-                console.info(j);
-                $("#start").text("Start level 2");
-            });
-        }
-    });
-    $("#start").click(function () {
-        if (j == 2) {
-            $.ajax('numbers2.json', {
-                cache: false,
-                dataType: 'json'
-            }).done(function (numbers) {
-                console.debug('numbers ', numbers);
-                numbers.forEach(setSquare);
-                manageTd(numbers);
-                startTimer();
-                j++;
-                console.info(j);
-                $("#start").text("Start level 3");
-            });
-        }
-    });
-    $("#start").click(function () {
-        if (j == 3) {
-            $.ajax('numbers3.json', {
-                cache: false,
-                dataType: 'json'
-            }).done(function (numbers) {
-                console.debug('numbers ', numbers);
-                numbers.forEach(setSquare);
-                manageTd(numbers);
-                startTimer();
-                j++;
-                console.info(j);
-                $("#start").text("Start level 4");
-            });
-        }
-    });
-    $("#start").click(function () {
-        if (j == 4) {
-            $.ajax('numbers4.json', {
-                cache: false,
-                dataType: 'json'
-            }).done(function (numbers) {
-                console.debug('numbers ', numbers);
-                numbers.forEach(setSquare);
-                manageTd(numbers);
-                startTimer();
-                j = 1;
-                console.info(j);
-                $("#start").text("Restart level 1");
-            });
-        }
+        $.ajax('./list.php').done(function (response) {
+            var numbers = JSON.parse(response);
+            numbers.forEach(setSquare);
+            console.debug('shuffle', shuffle(numbers));
+            shuffle(numbers);
+        });
+
     });
 });
 
@@ -175,6 +141,8 @@ $('#random-numbers').ready(function () {
                 td.addClass('empty')
             }
         });
+
+        save();
     });
 
 
@@ -237,3 +205,28 @@ $('#random-numbers').ready(function () {
     }
 
 
+
+
+// $.ajax('./list.php').done(function(response) {
+//     console.warn('response',JSON.parse(response))
+// })
+
+
+function save() {
+
+    var nrs = [];
+
+    $('#random-numbers td').each(function () {
+        var number = this.innerHTML;
+        nrs.push(number || 0);
+    });
+
+    $.ajax('./save.php', {
+        dataType: 'json',
+        data: {
+            numbers: nrs
+        }
+    }).done(function (response) {
+        console.warn('response', JSON.parse(response))
+    })
+}

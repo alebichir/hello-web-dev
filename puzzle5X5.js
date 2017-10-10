@@ -43,12 +43,6 @@ function shuffle(numbers) {
 
 //1. ajax - read from a json file
 // 2. show numbers
-// $.ajax('numbers0.json').done(function (numbers) {
-//     console.debug('numbers ', numbers);
-//     numbers.forEach(setSquare);
-//     manageTd(numbers);
-// });
-
 $.ajax('numbers5X5.json', {
     cache: false,
     dataType: 'json'

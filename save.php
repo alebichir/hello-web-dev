@@ -1,12 +1,11 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "numbers";
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+include "db-connect.php";
+//TODO update db
+if(isset($_GET["numbers"])) {
+    $numbers = json_encode($_GET["numbers"]);
+    $sql = "UPDATE puzzle SET numbers='$numbers' WHERE id = 4";
+    $conn->query($sql);
 }
+
+$conn->close();
 ?>
