@@ -99,3 +99,4 @@ $('#random-numbers5X5 td').click(function () {
         }
     });
 });
+// WE NEED TO PUT THE TIMER
