@@ -1,5 +1,6 @@
 //Start the numeric puzzle
-var numbers = [];
+var numbers = [],
+    timer;
 
 function newTable() {
     for (var i = 0; i < 9; i++) {
@@ -90,3 +91,63 @@ $('#random-numbers3X3 td').click(function () {
         }
     });
 });
+
+//Stopwatch
+function startTimer() {
+    var minutesLabel = document.getElementById("minutes");
+    var secondsLabel = document.getElementById("seconds");
+    var totalSeconds = 0;
+
+    if (timer) {
+        timer.reset(1000);
+    } else {
+        timer = new Timer(function () {
+            setTime();
+        }, 1000)
+    }
+
+    function setTime() {
+        ++totalSeconds;
+        secondsLabel.innerHTML = pad(totalSeconds % 60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+    }
+
+    function pad(val) {
+        var valString = val + "";
+        if (valString.length < 2) {
+            return "0" + valString;
+        }
+        else {
+            return valString;
+        }
+    }
+}
+
+function Timer(fn, t) {
+    var timerObj = setInterval(fn, t);
+
+    this.stop = function () {
+        if (timerObj) {
+            clearInterval(timerObj);
+            timerObj = null;
+        }
+        return this;
+    };
+
+    // start timer using current settings (if it's not already running)
+    this.start = function () {
+        if (!timerObj) {
+            this.stop();
+            timerObj = setInterval(fn, t);
+        }
+        return this;
+    };
+
+    // start with new interval, stop current interval
+    this.reset = function (newT) {
+        t = newT;
+        return this.stop().start();
+    };
+}
+
+
