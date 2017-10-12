@@ -10,7 +10,7 @@ function newTable() {
 
 function setSquare(thisSquare, entry) {
     var currSquare = "sqa" + thisSquare;
-    document.getElementById(currSquare).innerHTML= entry;
+    document.getElementById(currSquare).innerHTML = entry;
 }
 
 function manageTd(numbers) {
@@ -27,21 +27,21 @@ function manageTd(numbers) {
 }
 
 function shuffle(numbers) {
-    return function (numbers) {
-        var tmp, current, top = numbers.length;
-        if (top) while (--top) {
-            current = Math.floor(Math.random() * (top + 1));
-            tmp = numbers[current];
-            numbers[current] = numbers[top];
-            numbers[top] = tmp;
-        }
-        numbers.forEach(setSquare);
-        manageTd(numbers);
-        startTimer();
+    // return function (numbers) {
+    var tmp, current, top = numbers.length;
+    if (top) while (--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = numbers[current];
+        numbers[current] = numbers[top];
+        numbers[top] = tmp;
     }
+    numbers.forEach(setSquare);
+    manageTd(numbers);
+    startTimer();
+    // }
 }
 
-$.ajax('numbers3X3.json', {
+$.ajax('./list3X3.php', {
     cache: false,
     dataType: 'json'
 }).done(function (numbers) {
@@ -53,7 +53,13 @@ $.ajax('numbers3X3.json', {
 //Start the game
 $('#random-numbers3X3').ready(function () {
     $("#start").click(function () {
-        $.get('numbers3X3.json', shuffle(numbers));
+        $.ajax('./list3X3.php').done(function (response) {
+            var numbers = JSON.parse(response);
+            numbers.forEach(setSquare);
+            console.debug('shuffle', shuffle(numbers));
+            shuffle(numbers);
+        });
+
     });
 });
 
@@ -90,7 +96,28 @@ $('#random-numbers3X3 td').click(function () {
             td.addClass('empty')
         }
     });
+    save();
 });
+
+function save() {
+
+    var nrs = [];
+    var id = 3;
+
+    $('#random-numbers3X3 td').each(function () {
+        var number = this.innerHTML;
+        nrs.push(number || 0);
+    });
+
+    $.ajax('./save3X3.php', {
+        dataType: 'json',
+        data: {
+            numbers: nrs
+        }
+    }).done(function (response) {
+        console.warn('response', JSON.parse(response))
+    })
+}
 
 //Stopwatch
 function startTimer() {

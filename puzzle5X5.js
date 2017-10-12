@@ -27,23 +27,21 @@ function manageTd(numbers) {
 }
 
 function shuffle(numbers) {
-    return function (numbers) {
-        var tmp, current, top = numbers.length;
-        if (top) while (--top) {
-            current = Math.floor(Math.random() * (top + 1));
-            tmp = numbers[current];
-            numbers[current] = numbers[top];
-            numbers[top] = tmp;
-        }
-        numbers.forEach(setSquare);
-        manageTd(numbers);
-        startTimer();
+    // return function (numbers) {
+    var tmp, current, top = numbers.length;
+    if (top) while (--top) {
+        current = Math.floor(Math.random() * (top + 1));
+        tmp = numbers[current];
+        numbers[current] = numbers[top];
+        numbers[top] = tmp;
     }
+    numbers.forEach(setSquare);
+    manageTd(numbers);
+    startTimer();
+    // }
 }
 
-//1. ajax - read from a json file
-// 2. show numbers
-$.ajax('numbers5X5.json', {
+$.ajax('./list5X5.php', {
     cache: false,
     dataType: 'json'
 }).done(function (numbers) {
@@ -55,7 +53,13 @@ $.ajax('numbers5X5.json', {
 //Start the game
 $('#random-numbers5X5').ready(function () {
     $("#start").click(function () {
-        $.get('numbers5X5.json', shuffle(numbers));
+        $.ajax('./list5X5.php').done(function (response) {
+            var numbers = JSON.parse(response);
+            numbers.forEach(setSquare);
+            console.debug('shuffle', shuffle(numbers));
+            shuffle(numbers);
+        });
+
     });
 });
 
@@ -92,7 +96,28 @@ $('#random-numbers5X5 td').click(function () {
             td.addClass('empty')
         }
     });
+    save();
 });
+
+function save() {
+
+    var nrs = [];
+    var id = 5;
+
+    $('#random-numbers5X5 td').each(function () {
+        var number = this.innerHTML;
+        nrs.push(number || 0);
+    });
+
+    $.ajax('./save5X5.php', {
+        dataType: 'json',
+        data: {
+            numbers: nrs
+        }
+    }).done(function (response) {
+        console.warn('response', JSON.parse(response))
+    })
+}
 
 //Stopwatch
 function startTimer() {

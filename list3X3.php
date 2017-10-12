@@ -1,6 +1,6 @@
 <?php
 include "db-connect.php";
-$sql = "SELECT * FROM puzzle WHERE id = 4";
+$sql = "SELECT * FROM puzzle WHERE id = 3";
 $result = $conn->query($sql);
 $numbers = '';
 if ($result->num_rows > 0) {

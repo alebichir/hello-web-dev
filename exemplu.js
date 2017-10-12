@@ -71,7 +71,7 @@ $('#random-numbers').ready(function () {
 //Reset the game
 $('#random-numbers').ready(function () {
     $("#reset").click(function () {
-        $.get('numbers.json', shuffle(numbers));//aici cred ca tre sa fie $.get('numbers0.json', manageTd(numbers));
+        $.get('numbers.json', shuffle(numbers));//aici cred ca tre sa fie $.get('numbers4X4.json', manageTd(numbers));
     });
 });
 

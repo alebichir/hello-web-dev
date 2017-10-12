@@ -3,8 +3,6 @@
 <head>
     <title>NUMERIC PUZZLE</title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <!--<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">-->
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
         //verify a quiz
@@ -67,17 +65,16 @@
             <ul>
                 <li><a href="index.html" title="Welcome home" class="tm">HOME</a></li>
                 <li><a href="puzzle3X3.html" title="Puzzle 3X3" class="tm">PUZZLE 3X3</a></li>
-                <li><a href="numbers.html" title="Play with numbers" class="tm">PUZZLE 4X4</a></li>
-                <li><a href="puzzle5X5.html" title="Play with numbers" class="tm">PUZZLE 5X5</a></li>
-                <li><a href="old-quiz.html" title="Old quiz" class="tm">OLD QUIZ</a></li>
-                <li><a href="new-quiz.php" title="New quiz" class="tm">NEW QUIZ</a></li>
+                <li><a href="puzzle4X4.html" title="Puzzle 4X4" class="tm">PUZZLE 4X4</a></li>
+                <li><a href="puzzle5X5.html" title="Puzzle 5X5" class="tm">PUZZLE 5X5</a></li>
+                <li><a href="quiz.html" title="Quiz" class="tm">QUIZ</a></li>
             </ul>
         </div>
     </div>
     <br/>
 
     <div id="content">
-        <div id="welcome-msg">OLD QUIZ</div>
+        <div id="welcome-msg">QUIZ</div>
         <br>
         <form method="POST">
             <div>
@@ -124,7 +121,13 @@
         <p>&copy; 2017 NUMERIC PUZZLE. All rights reserved.</p>
     </footer>
 </div>
-<!--<script src="javascriptfile.js"></script>-->
-
+<script>
+    //DOM
+    var header = document.getElementById("header");
+    function changeHeaderColor() {
+        header.style.color = "orange";
+    }
+    header.onclick = changeHeaderColor;
+</script>
 </body>
 </html>
