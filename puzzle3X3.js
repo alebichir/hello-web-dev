@@ -1,6 +1,7 @@
 //Start the numeric puzzle
-var numbers = [],
-    timer;
+var numbers = [];
+// var correctAnswer = ["0","1","2","3","4","5","6","7","8"];
+var correctAnswer = [0,1,2,3,4,5,6,7,8];
 
 function newTable() {
     for (var i = 0; i < 9; i++) {
@@ -37,7 +38,6 @@ function shuffle(numbers) {
     }
     numbers.forEach(setSquare);
     manageTd(numbers);
-    startTimer();
     // }
 }
 
@@ -119,62 +119,94 @@ function save() {
     })
 }
 
+if (numbers === correctAnswer) {
+    alert("Congratulations you solve the puzzle");
+}
+
 //Stopwatch
-function startTimer() {
-    var minutesLabel = document.getElementById("minutes");
-    var secondsLabel = document.getElementById("seconds");
-    var totalSeconds = 0;
+// Setting the variables
+var seconds = 0;
+var minutes = 0;
+var hours = 0;
+var len, str;
+var interavel;
 
-    if (timer) {
-        timer.reset(1000);
+// time interavel
+function timeSetting(sec) {
+    seconds += 1;
+    str = seconds.toString();
+    len = str.length;
+
+    if (len < 2){
+        document.getElementById('seconds').innerHTML = '0'+seconds;
     } else {
-        timer = new Timer(function () {
-            setTime();
-        }, 1000)
+        if(seconds == 60){
+
+            seconds = 0;
+            minutes += 1;
+            str = minutes.toString();
+            len = str.length;
+
+            if(len < 2){
+                document.getElementById('seconds').innerHTML = '0'+seconds;
+                document.getElementById('minutes').innerHTML = '0'+minutes;
+            } else {
+                if (minutes == 60){
+
+                    minutes = 0;
+                    hours += 1;
+                    str = hours.toString();
+                    len = str.length;
+
+                    if (len < 2){
+                        document.getElementById('seconds').innerHTML = '0'+seconds;
+                        document.getElementById('minutes').innerHTML = '0'+minutes;
+                        document.getElementById('hours').innerHTML = '0'+ hours;
+                    } else {
+                        if(hours == 24) {
+                            hours = 0
+                            document.getElementById('seconds').innerHTML = '0'+seconds;
+                            document.getElementById('minutes').innerHTML = '0'+minutes;
+                            document.getElementById('hours').innerHTML = '0'+ hours;
+                        } else {
+                            document.getElementById('seconds').innerHTML = '0'+seconds;
+                            document.getElementById('minutes').innerHTML = '0'+minutes;
+                            document.getElementById('hours').innerHTML = hours;
+                        }
+                    }
+
+                } else {
+                    document.getElementById('seconds').innerHTML = '0'+seconds;
+                    document.getElementById('minutes').innerHTML = minutes;
+                }
+            }
+
+        } else {
+            document.getElementById('seconds').innerHTML = seconds;
+        }
     }
 
-    function setTime() {
-        ++totalSeconds;
-        secondsLabel.innerHTML = pad(totalSeconds % 60);
-        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-    }
-
-    function pad(val) {
-        var valString = val + "";
-        if (valString.length < 2) {
-            return "0" + valString;
-        }
-        else {
-            return valString;
-        }
-    }
 }
 
-function Timer(fn, t) {
-    var timerObj = setInterval(fn, t);
 
-    this.stop = function () {
-        if (timerObj) {
-            clearInterval(timerObj);
-            timerObj = null;
-        }
-        return this;
-    };
-
-    // start timer using current settings (if it's not already running)
-    this.start = function () {
-        if (!timerObj) {
-            this.stop();
-            timerObj = setInterval(fn, t);
-        }
-        return this;
-    };
-
-    // start with new interval, stop current interval
-    this.reset = function (newT) {
-        t = newT;
-        return this.stop().start();
-    };
-}
+document.getElementById('start').onclick = function() {
+    interavel = setInterval(timeSetting, 1000);
+};
 
 
+// document.getElementById('stop').onclick = function() {
+//     clearInterval(interavel);
+// };
+
+
+document.getElementById('reset').onclick = function() {
+    clearInterval(interavel);
+
+    seconds = 0;
+    minutes = 0;
+    hours = 0;
+
+    document.getElementById('seconds').innerHTML = '00';
+    document.getElementById('minutes').innerHTML = '00';
+    document.getElementById('hours').innerHTML = '00';
+};
