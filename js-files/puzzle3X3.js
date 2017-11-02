@@ -1,7 +1,6 @@
 //Start the numeric puzzle
 var numbers = [];
-// var correctAnswer = ["0","1","2","3","4","5","6","7","8"];
-var correctAnswer = [0,1,2,3,4,5,6,7,8];
+var orderedNumbers = [0, "1", "2", "3", "4", "5", "6", "7", "8"];
 
 function newTable() {
     for (var i = 0; i < 9; i++) {
@@ -41,20 +40,21 @@ function shuffle(numbers) {
     // }
 }
 
-$.ajax('./list3X3.php', {
+$.ajax('list-db/list3X3.php', {
     cache: false,
     dataType: 'json'
 }).done(function (numbers) {
     console.debug('numbers ', numbers);
     numbers.forEach(setSquare);
     manageTd(numbers);
+    console.warn('numbers: ', numbers);
 });
 
 //Start the game
 $('#random-numbers3X3').ready(function () {
     $("#start").click(function () {
-        $.ajax('./list3X3.php').done(function (response) {
-            var numbers = JSON.parse(response);
+        $.ajax('list-db/list3X3.php').done(function (response) {
+            var numbers = JSON.parse(response)
             numbers.forEach(setSquare);
             console.debug('shuffle', shuffle(numbers));
             shuffle(numbers);
@@ -67,7 +67,7 @@ $('#random-numbers3X3').ready(function () {
 //Reset the game
 $('#random-numbers3X3').ready(function () {
     $("#reset").click(function () {
-        $.get('numbers3X3.json', function (numbers) {
+        $.get('json-files/numbers3X3.json', function (numbers) {
             console.debug('numbers ', numbers);
             numbers.forEach(setSquare);
             manageTd(numbers);
@@ -99,6 +99,7 @@ $('#random-numbers3X3 td').click(function () {
     save();
 });
 
+
 function save() {
 
     var nrs = [];
@@ -109,7 +110,7 @@ function save() {
         nrs.push(number || 0);
     });
 
-    $.ajax('./save3X3.php', {
+    $.ajax('save-db/save3X3.php', {
         dataType: 'json',
         data: {
             numbers: nrs
@@ -117,11 +118,18 @@ function save() {
     }).done(function (response) {
         console.warn('response', JSON.parse(response))
     })
+
+    //check if array from db === sorted array
+    var isSame = (orderedNumbers.length == nrs.length) && orderedNumbers.every(function (element, index) {
+            return element === nrs[index];
+        });
+    console.warn('isSame', isSame);
+    if (isSame) {
+        alert('You solved the puzzle!!!');
+        stopTime();
+    }
 }
 
-if (numbers === correctAnswer) {
-    alert("Congratulations you solve the puzzle");
-}
 
 //Stopwatch
 // Setting the variables
@@ -137,46 +145,46 @@ function timeSetting(sec) {
     str = seconds.toString();
     len = str.length;
 
-    if (len < 2){
-        document.getElementById('seconds').innerHTML = '0'+seconds;
+    if (len < 2) {
+        document.getElementById('seconds').innerHTML = '0' + seconds;
     } else {
-        if(seconds == 60){
+        if (seconds == 60) {
 
             seconds = 0;
             minutes += 1;
             str = minutes.toString();
             len = str.length;
 
-            if(len < 2){
-                document.getElementById('seconds').innerHTML = '0'+seconds;
-                document.getElementById('minutes').innerHTML = '0'+minutes;
+            if (len < 2) {
+                document.getElementById('seconds').innerHTML = '0' + seconds;
+                document.getElementById('minutes').innerHTML = '0' + minutes;
             } else {
-                if (minutes == 60){
+                if (minutes == 60) {
 
                     minutes = 0;
                     hours += 1;
                     str = hours.toString();
                     len = str.length;
 
-                    if (len < 2){
-                        document.getElementById('seconds').innerHTML = '0'+seconds;
-                        document.getElementById('minutes').innerHTML = '0'+minutes;
-                        document.getElementById('hours').innerHTML = '0'+ hours;
+                    if (len < 2) {
+                        document.getElementById('seconds').innerHTML = '0' + seconds;
+                        document.getElementById('minutes').innerHTML = '0' + minutes;
+                        document.getElementById('hours').innerHTML = '0' + hours;
                     } else {
-                        if(hours == 24) {
+                        if (hours == 24) {
                             hours = 0
-                            document.getElementById('seconds').innerHTML = '0'+seconds;
-                            document.getElementById('minutes').innerHTML = '0'+minutes;
-                            document.getElementById('hours').innerHTML = '0'+ hours;
+                            document.getElementById('seconds').innerHTML = '0' + seconds;
+                            document.getElementById('minutes').innerHTML = '0' + minutes;
+                            document.getElementById('hours').innerHTML = '0' + hours;
                         } else {
-                            document.getElementById('seconds').innerHTML = '0'+seconds;
-                            document.getElementById('minutes').innerHTML = '0'+minutes;
+                            document.getElementById('seconds').innerHTML = '0' + seconds;
+                            document.getElementById('minutes').innerHTML = '0' + minutes;
                             document.getElementById('hours').innerHTML = hours;
                         }
                     }
 
                 } else {
-                    document.getElementById('seconds').innerHTML = '0'+seconds;
+                    document.getElementById('seconds').innerHTML = '0' + seconds;
                     document.getElementById('minutes').innerHTML = minutes;
                 }
             }
@@ -189,17 +197,17 @@ function timeSetting(sec) {
 }
 
 
-document.getElementById('start').onclick = function() {
+document.getElementById('start').onclick = function () {
     interavel = setInterval(timeSetting, 1000);
 };
 
 
-// document.getElementById('stop').onclick = function() {
-//     clearInterval(interavel);
-// };
+ function stopTime() {
+    clearInterval(interavel);
+};
 
 
-document.getElementById('reset').onclick = function() {
+document.getElementById('reset').onclick = function () {
     clearInterval(interavel);
 
     seconds = 0;

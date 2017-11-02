@@ -1,6 +1,6 @@
 //Start the numeric puzzle
 var numbers = [];
-var correctAnswer = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"];
+var orderedNumbers = [0,"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"];
 
 function newTable() {
     for (var i = 0; i < 25; i++) {
@@ -40,7 +40,7 @@ function shuffle(numbers) {
     // }
 }
 
-$.ajax('./list5X5.php', {
+$.ajax('list-db/list5X5.php', {
     cache: false,
     dataType: 'json'
 }).done(function (numbers) {
@@ -52,7 +52,7 @@ $.ajax('./list5X5.php', {
 //Start the game
 $('#random-numbers5X5').ready(function () {
     $("#start").click(function () {
-        $.ajax('./list5X5.php').done(function (response) {
+        $.ajax('list-db/list5X5.php').done(function (response) {
             var numbers = JSON.parse(response);
             numbers.forEach(setSquare);
             console.debug('shuffle', shuffle(numbers));
@@ -66,7 +66,7 @@ $('#random-numbers5X5').ready(function () {
 //Reset the game
 $('#random-numbers5X5').ready(function () {
     $("#reset").click(function () {
-        $.get('numbers5X5.json', function (numbers) {
+        $.get('json-files/numbers5X5.json', function (numbers) {
             console.debug('numbers ', numbers);
             numbers.forEach(setSquare);
             manageTd(numbers);
@@ -108,7 +108,7 @@ function save() {
         nrs.push(number || 0);
     });
 
-    $.ajax('./save5X5.php', {
+    $.ajax('save-db/save5X5.php', {
         dataType: 'json',
         data: {
             numbers: nrs
@@ -116,6 +116,16 @@ function save() {
     }).done(function (response) {
         console.warn('response', JSON.parse(response))
     })
+
+    //check if array from db === sorted array
+    var isSame = (orderedNumbers.length == nrs.length) && orderedNumbers.every(function (element, index) {
+            return element === nrs[index];
+        });
+    console.warn('isSame', isSame);
+    if (isSame) {
+        alert('You solved the puzzle!!!');
+        stopTime();
+    }
 }
 
 //Stopwatch
@@ -189,9 +199,9 @@ document.getElementById('start').onclick = function() {
 };
 
 
-// document.getElementById('stop').onclick = function() {
-//     clearInterval(interavel);
-// };
+function stopTime() {
+    clearInterval(interavel);
+};
 
 
 document.getElementById('reset').onclick = function() {

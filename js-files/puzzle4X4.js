@@ -1,6 +1,6 @@
 //Start the numeric puzzle
 var numbers = [];
-var correctAnswer = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"];
+var orderedNumbers = [0,"1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"];
 
 function newTable() {
     for (var i = 0; i < 16; i++) {
@@ -40,16 +40,8 @@ function shuffle(numbers) {
     // }
 }
 
-//1. ajax - read from a json file
-// 2. show numbers
-// $.ajax('numbers4X4.json').done(function (numbers) {
-//     console.debug('numbers ', numbers);
-//     numbers.forEach(setSquare);
-//     manageTd(numbers);
-// });
 
-// $.ajax('numbers4X4.json', {
-$.ajax('./list.php', {
+$.ajax('list-db/list4X4.php', {
     cache: false,
     dataType: 'json'
 }).done(function (numbers) {
@@ -58,37 +50,11 @@ $.ajax('./list.php', {
     manageTd(numbers);
 });
 
-// //Start the game
-// $('#random-numbers4X4').ready(function () {
-//     $("#start").click(function () {
-//         $.get('numbers4X4.json', shuffle(numbers));
-//     });
-// });
 
 //Start the game
 $('#random-numbers4X4').ready(function () {
-    //var j = 1;
-    // $("#start").click(function () {
-    //     $.ajax('numbers' + j + '.json', {
-    //         cache: false,
-    //         dataType: 'json'
-    //     }).done(function (numbers) {
-    //         console.debug('numbers ', numbers);
-    //         numbers.forEach(setSquare);
-    //         manageTd(numbers);
-    //         startTimer();
-    //         console.info(j);
-    //         $("#start").text("Restart level 1");
-    //         if(j < 4) {
-    //             j++;
-    //         } else {
-    //             j = 1;
-    //         }
-    //     });
-    // });
-
     $("#start").click(function () {
-        $.ajax('./list.php').done(function (response) {
+        $.ajax('list-db/list4X4.php').done(function (response) {
             var numbers = JSON.parse(response);
             numbers.forEach(setSquare);
             console.debug('shuffle', shuffle(numbers));
@@ -102,7 +68,7 @@ $('#random-numbers4X4').ready(function () {
 //Reset the game
     $('#random-numbers4X4').ready(function () {
         $("#reset").click(function () {
-            $.get('numbers4X4.json', function (numbers) {
+            $.get('json-files/numbers4X4.json', function (numbers) {
                 console.debug('numbers ', numbers);
                 numbers.forEach(setSquare);
                 manageTd(numbers);
@@ -134,10 +100,6 @@ $('#random-numbers4X4').ready(function () {
         save();
     });
 
-// $.ajax('./list.php').done(function(response) {
-//     console.warn('response',JSON.parse(response))
-// })
-
 
 function save() {
 
@@ -149,7 +111,7 @@ function save() {
         nrs.push(number || 0);
     });
 
-    $.ajax('./save.php', {
+    $.ajax('save-db/save4X4.php', {
         dataType: 'json',
         data: {
             numbers: nrs
@@ -157,6 +119,16 @@ function save() {
     }).done(function (response) {
         console.warn('response', JSON.parse(response))
     })
+
+    //check if array from db === sorted array
+    var isSame = (orderedNumbers.length == nrs.length) && orderedNumbers.every(function (element, index) {
+            return element === nrs[index];
+        });
+    console.warn('isSame', isSame);
+    if (isSame) {
+        alert('You solved the puzzle!!!');
+        stopTime();
+    }
 }
 
 //Stopwatch
@@ -224,15 +196,14 @@ function timeSetting(sec) {
 
 }
 
-
 document.getElementById('start').onclick = function() {
     interavel = setInterval(timeSetting, 1000);
 };
 
 
-// document.getElementById('stop').onclick = function() {
-//     clearInterval(interavel);
-// };
+function stopTime() {
+    clearInterval(interavel);
+};
 
 
 document.getElementById('reset').onclick = function() {
