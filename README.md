@@ -1,5 +1,6 @@
-# hello-web-dev
+# hello-web-dev 
 Project for a web-development training course
+Numeric Puzzle
 
 About this project
 
