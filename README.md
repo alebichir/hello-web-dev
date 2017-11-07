@@ -31,3 +31,4 @@ $username = "root";
 $password = "";
 $dbname = "numbers";
 
+Page live
