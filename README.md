@@ -1,7 +1,7 @@
 
 # About this project
 
-This group project it is actually a homework for a Web-Development Course, we - Cristi, Adi and Ale - are trying to complete by the end of the course. It consists in creating three puzzles with numbers and in answering a short quiz.
+This group project consists in creating three puzzles with numbers and in answering a short quiz.
 
 # Our numeric puzzles
 
