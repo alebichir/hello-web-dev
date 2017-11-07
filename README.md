@@ -16,7 +16,7 @@ P.S. In doing this group project we used HTML, CSS, JavaScript, jQuery, PHP, myS
 
 
 Raw git example of our project here:
-<a href="https://rawgit.com/alebichir/hello-web-dev/master/puzzle4X4.html">HTML Preview</a>
+<a href="https://rawgit.com/alebichir/hello-web-dev/master/puzzle4X4.html?action=demo">HTML Preview</a>
 
 To set up this project you need to do this:
 1. Create a symbolic link in C:\xampp\htdocs to a folder called puzzle.

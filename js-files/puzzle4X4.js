@@ -41,7 +41,11 @@ function shuffle(numbers) {
 }
 
 
-$.ajax('list-db/list4X4.php', {
+var loadUrl = 'list-db/list4X4.php';
+if(window.location.search.indexOf('action=demo') !== -1) {
+    loadUrl = 'json-files/numbers4X4.json';
+}
+$.ajax(loadUrl, {
     cache: false,
     dataType: 'json'
 }).done(function (numbers) {
